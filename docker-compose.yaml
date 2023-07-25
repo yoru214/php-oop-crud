@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      # Mount source-code for development
+      - ./:/var/www
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kredo_demo
+      MYSQL_USER: kredo_demo
+      MYSQL_PASSWORD: kredo_demo
+
+volumes:
+  mysql-data:
