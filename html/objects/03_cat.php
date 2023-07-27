@@ -6,4 +6,8 @@ class Cat extends Pet {
     public function sound() {
         return "meow";
     }
+
+    public function all() {
+        return $this->list("Cat");
+    }
 }

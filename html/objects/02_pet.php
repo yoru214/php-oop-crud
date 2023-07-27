@@ -3,6 +3,7 @@
 // Inheritance
 class Pet extends MySQL{
 
+    // Data properties the object is expected to hold
     protected int $id;
 
     protected string $name;
@@ -13,6 +14,7 @@ class Pet extends MySQL{
 
     protected string $remarks;
 
+    // functions to access and update object data properties
     public function id() {
         return $this->id;
     }
@@ -42,6 +44,7 @@ class Pet extends MySQL{
         return $this->remarks;
     }
 
+    // Function to create the object and invokes the insert to database function
     public function create() {
 
         $data["name"]=$this->name;
@@ -52,6 +55,7 @@ class Pet extends MySQL{
 
     }
 
+    // function that will read data from the MySQL object by id
     public function read($id) {
         $error = $this->selectByID("pets", $id);
         if($error) {
@@ -60,6 +64,8 @@ class Pet extends MySQL{
             $this->id = $id;
         }
     }
+
+    // Function that will update the data to the database
     public function update() {
         $data["name"]=$this->name;
         $data["type"]=$this->type;
@@ -67,9 +73,15 @@ class Pet extends MySQL{
         $data["remarks"]=$this->remarks;
         $this->save("pets",$data);
     }
+
+    // Function to delete data from the database
     public function delete() {
         $this->deleteByID("pets");
     }
 
+    
+    public function list($type) {
+        return $this->listAll("pets",$type);
+    }
 
 }
