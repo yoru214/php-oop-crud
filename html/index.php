@@ -4,16 +4,17 @@ require_once 'objects/02_pet.php';
 require_once 'objects/03_cat.php';
 require_once 'objects/04_dog.php';
 
-class API {
+class App {
 
     private string $page_title = "Yeahmman's Pet Hotel";
-
+    // initalizes the class
     function __construct() {
 
         $this->route();
     }
 
-    function route() {
+    // set the routs based on get variables
+    private function route() {
         $page = "";
         $template = "index";
         if(isset($_GET["page"])) {
@@ -44,31 +45,32 @@ class API {
                 $data = $this->list();
                 break;
         }  
-
+        // loads the templates
         require_once("template/layout/header.php");
         require_once("template/" . $template. ".php");
         require_once("template/layout/footer.php");
 
     }
 
-    function list() {
+    // functions that serves as controllers
+    private function list() {
         return "";
     }
-
-    function cats() {
+    // loads the cat list page
+    private function cats() {
 
         $cat = new Cat();
         return $cat->all();
 
     }
-
-    function dogs() {
+    // loads the dog list page
+    private function dogs() {
         $dog = new Dog();
         return $dog->all();
 
     }
-
-    function get() {
+    // loads the view page for either the dog or cat
+    private function get() {
         $type = $_GET["type"];
         $id = $_GET["id"];
         
@@ -85,8 +87,8 @@ class API {
                 break;
         }
     }
-
-    function add() {
+    // loads the view to add dog or cats
+    private function add() {
         if(isset($_POST["name"])) {
             if($_GET["type"] == "Cat"){
                 $pet = new Cat();
@@ -104,8 +106,8 @@ class API {
             }
         }
     }
-
-    function update() {
+    // loads to page to update dogs or cats
+    private function update() {
         if($_GET["type"] == "Cat"){
             $pet = new Cat();
         }
@@ -127,8 +129,8 @@ class API {
 
         return $pet;
     }
-
-    function delete() {
+    // loads the page to delete dogs and cats
+    private function delete() {
         if($_GET["type"] == "Cat"){
             $pet = new Cat();
         }
@@ -143,91 +145,11 @@ class API {
             $pet->delete();
             header('Location: '.$location);
         }
-
         
-
         return $pet;
 
     }
 }
 
-
-new API();
-
-
-
-
-// $pet = new Dog();
-// $pet = new Cat();
-
-// // Create
-// $pet->name("Jazzy");
-// $pet->breed("German Shepherd");
-// $pet->remarks("Always sleeping");
-// $pet->create();
-
-// echo "</br> Create";
-// echo "</br>";
-// echo "ID: " . $pet->id();
-// echo "</br>";
-// echo "Name: " . $pet->name();
-// echo "</br>";
-// echo "Type: " . $pet->type();
-// echo "</br>";
-// echo "Breed: " . $pet->breed();
-// echo "</br>";
-// echo "Remarks: " . $pet->remarks();
-// echo "</br>";
-// echo "Sound: " . $pet->sound();
-// echo "</br>";
-
-
-// // Read
-// $pet->read(5);
-
-// echo "</br> Read";
-// echo "</br>";
-// echo "ID: " . $pet->id();
-// echo "</br>";
-// echo "Name: " . $pet->name();
-// echo "</br>";
-// echo "Type: " . $pet->type();
-// echo "</br>";
-// echo "Breed: " . $pet->breed();
-// echo "</br>";
-// echo "Remarks: " . $pet->remarks();
-// echo "</br>";
-
-// // Update
-// $pet->name("Chico");
-// $pet->update();
-// echo "</br> Update";
-// echo "</br>";
-// echo "ID: " . $pet->id();
-// echo "</br>";
-// echo "Name: " . $pet->name();
-// echo "</br>";
-// echo "Type: " . $pet->type();
-// echo "</br>";
-// echo "Breed: " . $pet->breed();
-// echo "</br>";
-// echo "Remarks: " . $pet->remarks();
-// echo "</br>";
-
-// // Delete
-// $pet->read(64);
-// $pet->delete();
-
-// echo "</br> Delete";
-// echo "</br>";
-// echo "ID: " . $pet->id();
-// echo "</br>";
-// echo "Name: " . $pet->name();
-// echo "</br>";
-// echo "Type: " . $pet->type();
-// echo "</br>";
-// echo "Breed: " . $pet->breed();
-// echo "</br>";
-// echo "Remarks: " . $pet->remarks();
-// echo "</br>";
-
+// instantiating the App class
+$app = new App();
