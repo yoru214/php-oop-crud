@@ -51,12 +51,15 @@ class Pet extends MySQL{
         $data["type"]=$this->type;
         $data["breed"]=$this->breed;
         $data["remarks"]=$this->remarks;
+
+        // accessing inherited function
         $this->insert("pets", $data);
 
     }
 
     // function that will read data from the MySQL object by id
     public function read($id) {
+        // accessing inherited function
         $error = $this->selectByID("pets", $id);
         if($error) {
             echo $error;
@@ -71,11 +74,15 @@ class Pet extends MySQL{
         $data["type"]=$this->type;
         $data["breed"]=$this->breed;
         $data["remarks"]=$this->remarks;
+
+        // accessing inherited function
         $this->save("pets",$data);
     }
 
     // Function to delete data from the database
     public function delete() {
+
+        // accessing inherited function
         $this->deleteByID("pets");
     }
 

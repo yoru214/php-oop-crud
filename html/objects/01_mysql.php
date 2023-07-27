@@ -86,7 +86,7 @@ class MySQL {
         }
     }
 
-
+    // Function that lists pets by type
     public function listAll($table, $type) {
 
         $sql = "SELECT * FROM " . $table ." WHERE type = ?";
